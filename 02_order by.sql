@@ -61,4 +61,4 @@ SELECT
 SELECT
        *
   FROM tbl_category
-  ORDER BY -ref_category_code; -- asc는 뭐다?
+  ORDER BY -ref_category_code; -- asc는 뭐다? null값만 asc로 나머진 '-'라 반대로
