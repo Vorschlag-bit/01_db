@@ -107,3 +107,6 @@ SELECT
   FROM tbl_category
 --  WHERE ref_category_code = NULL; -- 안 나온다
  WHERE ref_category_code IS NULL;   -- is not null이면 채워진 컬럼만 조회
+ 
+ 
+ SELECT * FROM tbl_menu;
