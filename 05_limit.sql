@@ -18,3 +18,8 @@ SELECT
   LIMIT 4, 3; -- 처음에는 시작인덱스, 원하는 자르고 싶은 개수(5번째 이후 3개를 자르기)
   
 -- tmi) index 체계 설명: 10진법 = 0 - 9니까 10개의 데이터를 한 자리수로 표현. 예제)컴퓨터는 1-12월을 0-11월이라고 받아들임.
+
+SELECT
+		 *
+  FROM tbl_menu
+ ORDER BY menu_code LIMIT 10; -- 하나의 수치만 주면 length의미만 갖는다.mysqlmysql

@@ -21,7 +21,7 @@ SELECT
  SELECT
  		  DISTINCT ref_category_code
 --  	  ,  category_name AS '카테고리명'
-   FROM tbl_category;
+   FROM tbl_category
   WHERE ref_category_code IS NOT NULL;
   
 --  추후 배울 예정이지만 서브 쿼리를 활용하면 하나의
