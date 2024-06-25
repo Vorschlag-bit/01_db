@@ -29,4 +29,37 @@ SELECT
 	  , b.category_name
 	  , a.category_code
   FROM tbl_menu a
- INNER JOIN tbl_category b USING (category_code);  -- 
+ INNER JOIN tbl_category b USING (category_code);
+ 
+--  ---------------------------------------------------------
+-- outer join
+-- 1) Left join
+SELECT
+		 a.category_name
+	  , b.menu_name
+  FROM tbl_category a
+  LEFT JOIN tbl_menu b ON (a.category_code = b.category_code);
+  
+-- 2)right join
+SELECT
+		 a.menu_name
+	  , b.category_name
+  FROM tbl_menu a
+ RIGHT JOIN tbl_category b ON (a.category_code = b.category_code);
+--  join은 반드시 2개씩 일어난다. 다중 조인을 하더라도 순서대로 2개씩하는 셈
+
+-- 3) cross join
+SELECT
+		 a.menu_name
+	  , b.category_name
+  FROM tbl_menu a
+ CROSS JOIN tbl_category b;
+-- 4) self join
+-- a에 해당하는 것은ㅇ 하위 카테고리, b에 해당하는 것은 상위 카테고리
+SELECT
+		 a.category_name
+	  , b.category_name
+  FROM tbl_category a
+  JOIN tbl_category b ON (a.ref_category_code = b.category_code);
+  
+SELECT * FROM tbl_category;
