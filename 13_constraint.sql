@@ -172,3 +172,54 @@ SELECT * FROM user_fk2;
 -- 삭제되면 grade_code가 null로 바뀌었는지 확인(DELETE RULE)
 DELETE FROM user_grade WHERE grade_code = 10;
 SELECT * FROM user_fk2;
+
+
+-- 참조하는 부모 테이블의 행 삭제 후 참조 컬럼 값 확인
+DELETE FROM user_grade WHERE grade_code = 10;
+SELECT * FROM user_fk2;
+
+/*check 제약조건(조건식 활용)*/
+DROP TABLE if EXISTS user_check;
+CREATE TABLE if NOT EXISTS user_check (
+  user_no INT AUTO_INCREMENT PRIMARY KEY,
+  user_name VARCHAR(255) NOT NULL,
+  gender VARCHAR(3) CHECK(GENDER IN ('남', '여')),
+  age INT CHECK(age >= 19)
+) ENGINE = INNODB;
+
+INSERT
+  INTO user_check
+VALUES
+(NULL, '홍길동', '남', 25),
+(NULL, '고길동', '남', 45);
+
+SELECT * FROM user_check;
+
+-- 성별에 잘못된 값 입력
+INSERT
+  INTO user_check
+VALUES
+(NULL, '아메바', '?', 19);
+
+INSERT
+  INTO user_check
+VALUES
+(NULL, '유관순', '여', 16);
+
+/*default 제약조건*/
+CREATE TABLE if NOT EXISTS tbl_country (
+  country_code INT AUTO_INCREMENT PRIMARY KEY,
+  country_name VARCHAR(255) DEFAULT '한국',
+  population VARCHAR(255) DEFAULT '0명',
+  add_day DATE DEFAULT (CURRENT_DATE),
+  add_time DATETIME DEFAULT (current_time)
+) ENGINE = INNODB;
+
+INSERT
+  INTO tbl_country
+VALUES
+(NULL, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+
+SELECT * FROM tbl_country; -- 여기서 시간의 기본값은 데이터서버가 있는 곳 기준이다.
+
+-- DDL의 내용과 비슷(constraint)

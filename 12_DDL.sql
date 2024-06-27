@@ -42,7 +42,7 @@ ROLLBACK;
 
 /*alter*/
 -- 없던 col 만들고, 수정하고 새로운 제약조건까지 걸 수 있다.
--- 컬럼 추가
+-- 컬럼 건드리기
 ALTER TABLE tb2 ADD col2 INT NOT NULL;
 DESC tb2;
 
@@ -63,6 +63,9 @@ ALTER TABLE tb2 drop PRIMARY KEY;
 DESC tb2;
 
 /*truncate*/ -- 절삭(메모리 차지하는 걸 싹 비우기)
+-- truncate vs delete
+-- table의 데이터(데이터 및 관련 제약조건 등 다 제거)
+-- table 초기화(table 을 처음 만들 때로 되돌림)
 CREATE TABLE if NOT EXISTS tb3 (
   pk INT AUTO_INCREMENT,
   fk INT,
@@ -77,6 +80,23 @@ SELECT * FROM tb3;
 TRUNCATE TABLE tb3;
 
 
+DROP TABLE tb3;
 
+CREATE TABLE if NOT EXISTS tb3 (
+  pk INT,
+  fk INT,
+  col1 VARCHAR(255) CHECK(col1 IN ('Y', 'N'))
+);
 
+INSERT
+  INTO tb3
+VALUES
+(
+  1, 2, 'Y'
+);
+SET autocommit = 0;
+SELECT * FROM tb3;
 
+TRUNCATE tb3;
+ROLLBACK;
+DELETE FROM tb3;
